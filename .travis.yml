@@ -1,0 +1,11 @@
+sudo: required
+services:
+    - docker  # we need docker for our project
+
+before_install:
+    - docker build -t plaxthor/docker-react -f Dockerfile.dev .
+
+script:
+    - docker run -e CI=true plaxthor/docker-react npm run test -- --coverage  #to quit after tests are done
+
+language: generic
