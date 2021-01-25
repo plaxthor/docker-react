@@ -8,4 +8,17 @@ before_install:
 script:
     - docker run -e CI=true plaxthor/docker-react npm run test -- --coverage  #to quit after tests are done
 
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "docker-react"
+    env: "DockerReact-env"
+    bucket_name: "elasticbeanstalk-us-east-2-125258053324"
+    bucket_path: "docker-react"
+    on:
+      branch: master
+
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
+
 language: generic
